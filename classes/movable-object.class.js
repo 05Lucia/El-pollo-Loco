@@ -6,4 +6,8 @@ class MovebaleObject {
     moveRight() {
         console.log('Moving right')
     }
+    
+    moveLight() {
+
+    }
 }
