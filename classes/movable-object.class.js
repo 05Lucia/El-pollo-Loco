@@ -1,7 +1,9 @@
 class MovebaleObject {
     x = 120;
-    y = 400;
+    y = 300;
     img;
+    height = 150;
+    width = 100;
 
     loadeImage(path) {
         this.img = new Image(); // this.img = document.getElementById('image') <img id="image"
