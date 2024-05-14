@@ -9,7 +9,7 @@ class World {
         new Cloude()
     ];
     backgroundObjects = [
-        new BackgroundObject('./img/5_background/layers/1_first_layer', 0, 230 )
+        new BackgroundObject('./img/5_background/layers/1_first_layer', 0)
     ];
     canvas
     ctx;
@@ -28,8 +28,10 @@ class World {
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.backgroundObjects);
 
+
+
         let self = this;
-        requestAnimationFrame(function(){// draw() wird immer wieder aufgerufen.
+        requestAnimationFrame(function () {// draw() wird immer wieder aufgerufen.
             self.draw();
         });
     }
