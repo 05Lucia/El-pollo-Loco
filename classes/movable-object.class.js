@@ -1,8 +1,8 @@
 class MovebaleObject {
     x = 120;
-    y = 250;
+    y = 300;
     img;
-    height = 150;
+    height = 100;
     width = 100;
 
     loadeImage(path) {
