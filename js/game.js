@@ -11,45 +11,47 @@ function init() {
 }
 
 document.addEventListener('keydown', (event) => {
-    if (event.keyCode == 39||68) {
+    console.log(event);
+    if (event.code == "KeyD" || event.code == "ArrowRight") {
         keyboard.RIGHT = true;
     }
     
-    if (event.keyCode == 37||65) {
+    if (event.code == "KeyA" || event.code == "ArrowLeft") {
         keyboard.LEFT = true;
     }
 
-    if (event.keyCode == 38||87) {
+    if (event.code == "KeyW" || event.code == "ArrowUp") {
         keyboard.UP = true;
     }
 
-    if (event.keyCode == 40||83) {
+    if (event.code == "KeyS" || event.code == "ArrowDown") {
         keyboard.DOWN = true;
     }
 
-    if (event.keyCode == 32) {
+    if (event.code == "Space") {
         keyboard.SPACE = true;
     }
 });
 
 document.addEventListener('keyup', (event) => {
-    if (event.keyCode == 39||68) {
+    console.log(event);
+    if (event.code == "KeyD" || event.code == "ArrowRight") {
         keyboard.RIGHT = false;
     }
     
-    if (event.keyCode == 37||65) {
+    if (event.code == "KeyA" || event.code == "ArrowLeft") {
         keyboard.LEFT = false;
     }
 
-    if (event.keyCode == 38||87) {
+    if (event.code == "KeyW" || event.code == "ArrowUp") {
         keyboard.UP = false;
     }
 
-    if (event.keyCode == 40||83) {
+    if (event.code == "KeyS" || event.code == "ArrowDown") {
         keyboard.DOWN = false;
     }
 
-    if (event.keyCode == 32) {
+    if (event.code == "Space") {
         keyboard.SPACE = false;
     }
 });
