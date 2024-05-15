@@ -6,6 +6,7 @@ class MovebaleObject {
     width = 100;
     imageCache = {};
     currentImage = 0;
+    speed = 0.15;
 
     loadeImage(path) {
         this.img = new Image(); // this.img = document.getElementById('image') <img id="image"
@@ -25,7 +26,9 @@ class MovebaleObject {
         console.log('Moving right')
     }
 
-    moveLight() {
-
+    moveLeft() {
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000 / 60);
     }
 }
