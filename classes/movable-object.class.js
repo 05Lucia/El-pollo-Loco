@@ -12,10 +12,10 @@ class MovebaleObject {
     }
 
     loadeImages(array) {
-        array.forEach(path => {
+        array.forEach((path) => {
             let img = new Image();
             img.src = path;
-            this.imageCache[path] = path;
+            this.imageCache[path] = img;
         });
 
     }
