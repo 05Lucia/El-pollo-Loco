@@ -14,7 +14,7 @@ class World {
         new BackgroundObject('./img/5_background/layers/2_second_layer/1.png', 0),
         new BackgroundObject('./img/5_background/layers/1_first_layer/1.png', 0)
     ];
-    
+
     canvas;
     ctx;
     keyboard;
@@ -38,7 +38,7 @@ class World {
         this.addObjectsToMap(this.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
-        
+
         let self = this;
         requestAnimationFrame(function () {// draw() wird immer wieder aufgerufen.
             self.draw();
@@ -52,6 +52,16 @@ class World {
     }
 
     addToMap(mo) {
+        if (mo.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(mo.width, 0);
+            this.ctx.scale(-1, 1);
+            mo.x = mo.x * -1;
+        }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if (mo.otherDirection) {
+            mo.x = mo.x * -1;
+            this.ctx.restore();
+        }
     }
 }
