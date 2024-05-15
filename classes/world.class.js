@@ -54,14 +54,14 @@ class World {
     addToMap(mo) {
         if (mo.otherDirection) {
             this.ctx.save();
-            this.ctx.translate(mo.width, 0);
-            this.ctx.scale(-1, 1);
-            mo.x = mo.x * -1;
+            this.ctx.translate(mo.width, 0); // object um seine eingene berite verscheiben (damit kein sprung enstehent)
+            this.ctx.scale(-1, 1);// 180° spiegelung
+            mo.x = mo.x * -1;// x kordiante spiegeln damit in die richtige richtung gelaufen wird.
         }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
         if (mo.otherDirection) {
             mo.x = mo.x * -1;
-            this.ctx.restore();
+            this.ctx.restore();// reset damit alles andere nicht spiegel verkehrt ist!! 
         }
     }
 }
