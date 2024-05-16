@@ -12,6 +12,7 @@ class Character extends MovebaleObject {
         './img/2_character_pepe/2_walk/W-26.png'
     ]
     world;
+    running_sound = new Audio('./audio/running.mp3')
 
 
     constructor() {
@@ -22,6 +23,7 @@ class Character extends MovebaleObject {
 
     animate() {
         setInterval(() => {
+           
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.x += this.speed;
                 this.otherDirection = false;
@@ -34,11 +36,10 @@ class Character extends MovebaleObject {
         }, 1000 / 60)
 
         setInterval(() => {
+            this.running_sound.pause();
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                let i = this.currentImage % this.IMG_WALKING.length;// let i = 0 % 6 => 0, 1, 2, 3, 4, 5, 0, 1, ,2 ....
-                let path = this.IMG_WALKING[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
+                this.playAnimation(this.IMG_WALKING);
+                this.running_sound.play();
             }
         }, 50);
 

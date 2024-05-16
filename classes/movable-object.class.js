@@ -32,4 +32,11 @@ class MovebaleObject {
             this.x -= this.speed;
         }, 1000 / 60);
     }
+
+    playAnimation(imgArray) {
+        let i = this.currentImage % imgArray.length;// let i = 0 % 6 => 0, 1, 2, 3, 4, 5, 0, 1, ,2 ....
+            let path = imgArray[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+    }
 }
