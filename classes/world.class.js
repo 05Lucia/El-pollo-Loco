@@ -45,22 +45,26 @@ class World {
 
     addToMap(mo) {
         if (mo.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(mo.width, 0); // object um seine eingene berite verscheiben (damit kein sprung enstehent)
-            this.ctx.scale(-1, 1);// 180° spiegelung
-            mo.x = mo.x * -1;// x kordiante spiegeln damit in die richtige richtung gelaufen wird.
+            this.flipImg(mo);
         }
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = '2';
-        this.ctx.strokeStyle = 'blue';
-        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
-        this.ctx.stroke();
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
 
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
         if (mo.otherDirection) {
-            mo.x = mo.x * -1;
-            this.ctx.restore();// reset damit alles andere nicht spiegel verkehrt ist!! 
+            this.flipImgBack(mo);
         }
+    }
+
+    flipImg(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0); // object um seine eingene berite verscheiben (damit kein sprung enstehent)
+        this.ctx.scale(-1, 1);// 180° spiegelung
+        mo.x = mo.x * -1;// x kordiante spiegeln damit in die richtige richtung gelaufen wird.
+    }
+
+    flipImgBack(mo){
+        mo.x = mo.x * -1;
+            this.ctx.restore();// reset damit alles andere nicht spiegel verkehrt ist!! 
     }
 }
