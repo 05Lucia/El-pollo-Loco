@@ -13,11 +13,13 @@ class Chicken extends MovebaleObject{
         this.loadeImages(this.IMG_WALKING_CHICKEN)
         this.speed = 0.15 + Math.random() * 0.3;
         this.animate();
-        this.sound();
     }
 
     animate() {
-        this.moveLeft();
+        setInterval(() => {
+           this.moveLeft(); 
+        }, 1000 / 60);
+        
 
         setInterval(() => {
             this.playAnimation(this.IMG_WALKING_CHICKEN);

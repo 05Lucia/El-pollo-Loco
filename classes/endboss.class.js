@@ -17,9 +17,13 @@ class Endboss extends MovebaleObject {
     }
 
     animate() {
-        this.moveLeft();
         setInterval(() => {
+            this.moveLeft();
+        }, 1000 / 40);
+
+        setInterval(() => {
+
             this.playAnimation(this.IMG_WALKING);
-        }, 300)
+        }, 400)
     }
 }

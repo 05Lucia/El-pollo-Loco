@@ -50,6 +50,9 @@ class World {
             this.ctx.scale(-1, 1);// 180° spiegelung
             mo.x = mo.x * -1;// x kordiante spiegeln damit in die richtige richtung gelaufen wird.
         }
+
+        
+
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
         if (mo.otherDirection) {
             mo.x = mo.x * -1;
