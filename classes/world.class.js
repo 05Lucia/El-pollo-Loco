@@ -51,7 +51,11 @@ class World {
             mo.x = mo.x * -1;// x kordiante spiegeln damit in die richtige richtung gelaufen wird.
         }
 
-        
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '2';
+        this.ctx.strokeStyle = 'blue';
+        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        this.ctx.stroke();
 
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
         if (mo.otherDirection) {
