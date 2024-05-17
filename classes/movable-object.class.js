@@ -11,7 +11,7 @@ class MovebaleObject {
     speedY = 0;
     acceleration = 1.5;
     lifePoints = 100;
-    dead = false;
+    lastHit = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -60,9 +60,9 @@ class MovebaleObject {
 
     isColliding(mo) {
         return this.x + this.width > mo.x &&
-        this.y + this.height > mo.y &&
-        this.x < mo.x &&
-        this.y < mo.y + mo.height;
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height;
     }
 
     //Formel zur Kollisionsberechnung (Genauer)
@@ -78,13 +78,20 @@ class MovebaleObject {
         if (this.lifePoints > 0) {
             this.lifePoints -= 5;
             console.log('colision with Character LP', this.lifePoints);
+            this.lastHit = new Date().getTime();
         }
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit; // Differenc in ms
+        timePassed = timePassed / 1000 // in s
+        return timePassed < 1;
     }
 
     isDead() {
         if (this.lifePoints === 0) {
             return true;
-        } 
+        }
     }
 
     moveRight() {
