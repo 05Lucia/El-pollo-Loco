@@ -3,6 +3,7 @@ class Character extends MovebaleObject {
     height = 330;
     width = 160;
     speed = 10;
+
     IMG_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
         './img/2_character_pepe/2_walk/W-22.png',
@@ -34,19 +35,27 @@ class Character extends MovebaleObject {
         './img/2_character_pepe/1_idle/idle/I-9.png',
         './img/2_character_pepe/1_idle/idle/I-10.png'
     ];
+    IMG_DEAD = [
+        './img/2_character_pepe/5_dead/D-51.png',
+        './img/2_character_pepe/5_dead/D-52.png',
+        './img/2_character_pepe/5_dead/D-53.png',
+        './img/2_character_pepe/5_dead/D-54.png',
+        './img/2_character_pepe/5_dead/D-55.png',
+        './img/2_character_pepe/5_dead/D-56.png',
+        './img/2_character_pepe/5_dead/D-57.png'
+    ];
     world;
     running_sound = new Audio('./audio/running.mp3');
     jumping_sound = new Audio('./audio/jump.mp3')
-
 
     constructor() {
         super().loadeImage('./img/2_character_pepe/1_idle/idle/I-1.png');
         this.loadeImages(this.IMG_WALKING);
         this.loadeImages(this.IMG_JUMPING);
         this.loadeImages(this.IMG_IDLE);
+        this.loadeImages(this.IMG_DEAD);
         this.applyGravity();
         this.animate();
-
     }
 
     animate() {
@@ -54,6 +63,15 @@ class Character extends MovebaleObject {
         this.enableMovment();
         this.jumpingAnimation();
         this.walkingAnimation();
+        this.deadAnimation();
+    }
+
+    deadAnimation() {
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMG_DEAD);
+            }
+        }, 300);
     }
 
     idelAnimation() {
@@ -81,7 +99,7 @@ class Character extends MovebaleObject {
                     this.playAnimation(this.IMG_WALKING);//walking animation
                     this.running_sound.play();
                 }
-            } 
+            }
         }, 60);
 
     }

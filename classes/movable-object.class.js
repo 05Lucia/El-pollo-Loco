@@ -10,6 +10,8 @@ class MovebaleObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 1.5;
+    lifePoints = 100;
+    dead = false;
 
     applyGravity() {
         setInterval(() => {
@@ -56,6 +58,35 @@ class MovebaleObject {
         }
     }
 
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+        this.y + this.height > mo.y &&
+        this.x < mo.x &&
+        this.y < mo.y + mo.height;
+    }
+
+    //Formel zur Kollisionsberechnung (Genauer)
+    // isColliding(obj) {
+    //     return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
+    //         (this.y + this.offsetY + this.height) >= obj.Y &&
+    //         (this.y + this.offsetY) <= (obj.y + obj.height) &&
+    //         obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    // }
+
+
+    hit() {
+        if (this.lifePoints > 0) {
+            this.lifePoints -= 5;
+            console.log('colision with Character LP', this.lifePoints);
+        }
+    }
+
+    isDead() {
+        if (this.lifePoints === 0) {
+            return true;
+        } 
+    }
+
     moveRight() {
         this.x += this.speed;
     }
@@ -70,4 +101,5 @@ class MovebaleObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+
 }

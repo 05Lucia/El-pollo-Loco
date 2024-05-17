@@ -13,10 +13,21 @@ class World {
         this.keyboard = keyboard
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
     setWorld() {
         this.character.world = this;
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.hit();
+                }
+            })
+        }, 200);
     }
 
     draw() {
@@ -63,8 +74,10 @@ class World {
         mo.x = mo.x * -1;// x kordiante spiegeln damit in die richtige richtung gelaufen wird.
     }
 
-    flipImgBack(mo){
+    flipImgBack(mo) {
         mo.x = mo.x * -1;
-            this.ctx.restore();// reset damit alles andere nicht spiegel verkehrt ist!! 
+        this.ctx.restore();// reset damit alles andere nicht spiegel verkehrt ist!! 
     }
+
+
 }
