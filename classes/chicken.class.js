@@ -9,9 +9,9 @@ class Chicken extends MovebaleObject{
 
     constructor() {
         super().loadeImage('./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
-        this.x = 300+Math.random()*500;
+        this.x = 300+Math.random()*2000;
         this.loadeImages(this.IMG_WALKING_CHICKEN)
-        this.speed = 0.15 + Math.random() * 0.3;
+        this.speed = 0.15 + Math.random() * 0.6;
         this.animate();
     }
 

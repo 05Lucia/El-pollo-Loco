@@ -5,7 +5,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    
     throwableObjects = [];
 
     constructor(canvas, keyboard) {
@@ -32,7 +32,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.lifePoints)
+                this.level.statusBar[0].setPercentage(this.character.lifePoints);
             }
         })
     }
@@ -53,7 +53,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
         // ---------- space for fixd objects ------------! 
-        this.addToMap(this.statusBar);
+        this.addObjectsToMap(this.level.statusBar);
 
         this.ctx.translate(this.camera_x, 0);
 

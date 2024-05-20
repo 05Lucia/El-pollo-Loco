@@ -30,12 +30,12 @@ class MovebaleObject extends DrawableObject {
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
-            this.x < mo.x &&
+            this.x < mo.x + mo.width &&
             this.y < mo.y + mo.height;
     }
 
-    //Formel zur Kollisionsberechnung (Genauer)
-    // isColliding(obj) {
+    // Formel zur Kollisionsberechnung (Genauer)
+    // tisColliding(obj) {
     //     return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
     //         (this.y + this.offsetY + this.height) >= obj.Y &&
     //         (this.y + this.offsetY) <= (obj.y + obj.height) &&
