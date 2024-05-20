@@ -20,7 +20,11 @@ class MovebaleObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 130;
+        if (this instanceof ThrowableObject) {
+            return true
+        } else {
+            return this.y < 130;
+        }
     }
 
     isColliding(mo) {
