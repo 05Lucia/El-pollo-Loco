@@ -39,7 +39,7 @@ class World {
 
     throwObjects() {
         if (this.keyboard.THROW) {
-            let bottle = new ThrowableObject(this.character.x, this.character.y);
+            let bottle = new ThrowableObject(this.character.x +100 , this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
     }
@@ -54,9 +54,10 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // ---------- space for fixd objects ------------! 
         this.addToMap(this.statusBar);
-        this.addObjectsToMap(this.throwableObjects);
+
         this.ctx.translate(this.camera_x, 0);
 
+        this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
 

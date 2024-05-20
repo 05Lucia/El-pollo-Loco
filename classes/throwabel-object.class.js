@@ -13,7 +13,7 @@ class ThrowableObject extends MovebaleObject {
     throw() {
         this.applyGravity();
         setInterval(() => {
-            this.x += 10;
+            this.x += 12;
         }, 25);
     }
 }
