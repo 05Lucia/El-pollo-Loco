@@ -14,8 +14,6 @@ class MovebaleObject extends DrawableObject {
             } if (!(this.isAboveGround())) {
                 this.speedY = 0;
             }
-
-
         }, 1000 / 60)
     }
 

@@ -13,17 +13,16 @@ class Endboss extends MovebaleObject {
         super().loadeImage('./img/4_enemie_boss_chicken/1_walk/G1.png');
         this.loadeImages(this.IMG_WALKING);
         this.animate();
-        this.x = 2700;
+        this.x = 2500;
     }
 
     animate() {
         setInterval(() => {
             this.moveLeft();
-        }, 1000 / 40);
+        }, 1000 / 60);
 
         setInterval(() => {
-
             this.playAnimation(this.IMG_WALKING);
-        }, 400)
+        }, 350)
     }
 }

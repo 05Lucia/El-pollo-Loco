@@ -58,5 +58,21 @@ const level1 = new Level(
             './img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png',
             './img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png'
         ]),
+    ],
+    [
+        new CollectableObjects(360, './img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new CollectableObjects(360, './img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new CollectableObjects(360, './img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new CollectableObjects(360, './img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
+        new CollectableObjects(360, './img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+        new CollectableObjects(360, './img/6_salsa_bottle/2_salsa_bottle_on_ground.png')
+    ],
+    [
+        new CollectableObjects(150, './img/8_coin/coin_2.png'),
+        new CollectableObjects(150, './img/8_coin/coin_2.png'),
+        new CollectableObjects(150, './img/8_coin/coin_2.png'),
+        new CollectableObjects(150, './img/8_coin/coin_2.png'),
+        new CollectableObjects(150, './img/8_coin/coin_2.png'),
+        new CollectableObjects(150, './img/8_coin/coin_2.png')
     ]
 );
