@@ -32,15 +32,6 @@ class MovebaleObject extends DrawableObject {
             this.y < mo.y + mo.height;
     }
 
-    // Formel zur Kollisionsberechnung (Genauer)
-    // tisColliding(obj) {
-    //     return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
-    //         (this.y + this.offsetY + this.height) >= obj.Y &&
-    //         (this.y + this.offsetY) <= (obj.y + obj.height) &&
-    //         obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-    // }
-
-
     hit(hitPoints) {
         if (this.lifePoints > 0) {
             this.lifePoints -= hitPoints;

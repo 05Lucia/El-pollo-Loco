@@ -70,15 +70,9 @@ class Collisions {
     }
 
     collisionBoss() {
-        this.world.level.enemies
-            .filter(
-                (enemy) =>
-                    enemy instanceof Endboss
-            )
+        this.world.level.enemies.filter((enemy) =>enemy instanceof Endboss)
             .forEach((enemy) => {
-                if (this.world.character.isColliding(enemy) &&
-                    !(enemy.isDead()) &&
-                    this.wasHurt()) {
+                if (this.world.character.isColliding(enemy) && !(enemy.isDead()) && this.wasHurt(this.world.character)) {
                     this.world.character.hit(20);
                     if (this.world.character.lifePoints >= 0) {
                         this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
@@ -86,19 +80,19 @@ class Collisions {
                         this.world.level.statusBar[0].setPercentage(0);
                     }
                 }
-            })
+            });
     }
 
     collisionThrowenSalsa() {
         this.world.throwableObjects.forEach((bottle) => {
             const endBoss = this.world.level.enemies[this.world.level.enemies.length - 1];
             if (bottle.isColliding(endBoss) && this.wasHurt(this.world.level.enemies[this.world.level.enemies.length - 1])) {
-                this.hitEndBoss();
+                this.hitEndBoss(endBoss);
             }
         })
     }
 
-    hitEndBoss() {
+    hitEndBoss(endBoss) {
         endBoss.hit(35);
         if (endBoss.lifePoints >= 0) {
             this.world.level.statusBar[3].setPercentage(endBoss.lifePoints);
