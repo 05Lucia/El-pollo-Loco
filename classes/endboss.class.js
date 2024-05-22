@@ -26,7 +26,6 @@ class Endboss extends MovebaleObject {
         this.loadeImages(this.IMG_WALKING);
         this.loadeImages(this.IMG_DEAD);
         this.loadeImages(this.IMG_HURT);
-        this.animate();
         this.x = 2400;
     }
 
@@ -34,20 +33,20 @@ class Endboss extends MovebaleObject {
         this.moveLeft();
     }, 1000 / 60);
 
-    animate() {
-        this.enableAnimation();
-    }
+    animate = setInterval(() => {
+        if (this.isDead()) {
+            this.playAnimation(this.IMG_DEAD);
+            clearInterval(this.enableMovment);
+            this.loadeImage(this.IMG_DEAD[2])
+        } else if (this.isHurt(this.speed)) {
+            this.playAnimation(this.IMG_HURT);
+        } else {
+            this.playAnimation(this.IMG_WALKING);
+        }
+    }, 200)
 
-    enableAnimation() {
-        setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMG_DEAD);
-                clearInterval(this.enableMovment);
-            } else if (this.isHurt(this.speed)) {
-                this.playAnimation(this.IMG_HURT);
-            } else {
-                this.playAnimation(this.IMG_WALKING);
-            }
-        }, 200)
-    }
+    
+        
+
+
 }

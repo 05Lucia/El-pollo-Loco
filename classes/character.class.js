@@ -61,19 +61,9 @@ class Character extends MovebaleObject {
         this.loadeImages(this.IMG_DEAD);
         this.loadeImages(this.IMG_HURT);
         this.applyGravity();
-        this.animate();
     }
 
-    animate() {
-        this.idelAnimation();
-        this.enableMovment();
-
-        setInterval(() => {
-            this.enableAnimation();
-        }, 100);
-    }
-
-    enableAnimation() {
+    animation = setInterval(() => {
         this.running_sound.pause();
         if (this.isDead()) {
             this.playAnimation(this.IMG_DEAD);
@@ -88,26 +78,24 @@ class Character extends MovebaleObject {
                 this.running_sound.play();
             }
         }
-    }
+    }, 100)
 
-    idelAnimation() {
-        setInterval(() => {
-            if (!(this.isAboveGround()) && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
-                this.playAnimation(this.IMG_IDLE);
-            }
-        }, 500);
-    }
 
-    enableMovment() {
-        setInterval(() => {
-            this.enableWalking();
+    idelAnimation = setInterval(() => {
+        if (!(this.isAboveGround()) && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
+            this.playAnimation(this.IMG_IDLE);
+        } 
+    }, 500);
 
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-                this.jumpingSound();
-            }
-        }, 1000 / 60);
-    }
+
+    enableMovment = setInterval(() => {
+        this.enableWalking();
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.jump();
+            this.jumpingSound();
+        }
+    }, 1000 / 60);
+
 
     jumpingSound() {
         this.jumping_sound.play();

@@ -19,20 +19,33 @@ class Collisions {
 
     collisionChicken() {
         this.world.level.enemies
-            .filter(
-                (enemy) =>
-                    enemy instanceof Chicken
-            )
+            .filter((enemy) => enemy instanceof Chicken || enemy instanceof SmallChicken)
             .forEach((enemy) => {
                 if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround()) {
                     enemy.lifePoints = 0;
-                } if (this.world.character.isColliding(enemy) &&
-                    !(enemy.isDead()) &&
-                    this.wasHurt(this.world.character)) {
-                    this.world.character.hit(10);
-                    this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
+                } else if (this.world.character.isColliding(enemy) && !(enemy.isDead()) && this.wasHurt(this.world.character)) {
+                    this.characterHurting();
+                } else if (this.world.character.isDead()) {
+                    this.characterIsDying();
                 }
-            })
+            });
+    }
+
+    characterHurting() {
+        this.world.character.hit(10);
+        if (this.world.character.lifePoints >= 0) {
+            this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
+        } else {
+            this.world.level.statusBar[0].setPercentage(0);
+        }
+    }
+
+    characterIsDying() {
+        clearInterval(this.world.character.idelAnimation);
+        clearInterval(this.world.character.enableMovment);
+        setTimeout(() => {
+            clearInterval(this.world.character.animation);
+        }, 509);
     }
 
     collisionCoin() {
@@ -79,15 +92,27 @@ class Collisions {
     collisionThrowenSalsa() {
         this.world.throwableObjects.forEach((bottle) => {
             const endBoss = this.world.level.enemies[this.world.level.enemies.length - 1];
-            if (bottle.isColliding(endBoss)&& this.wasHurt(this.world.level.enemies[this.world.level.enemies.length - 1])) {
-                endBoss.hit(35);
-                if (endBoss.lifePoints >= 0) {
-                    this.world.level.statusBar[3].setPercentage(endBoss.lifePoints);
-                } else {
-                    this.world.level.statusBar[3].setPercentage(0);
-                }   
+            if (bottle.isColliding(endBoss) && this.wasHurt(this.world.level.enemies[this.world.level.enemies.length - 1])) {
+                this.hitEndBoss();
             }
         })
+    }
+
+    hitEndBoss() {
+        endBoss.hit(35);
+        if (endBoss.lifePoints >= 0) {
+            this.world.level.statusBar[3].setPercentage(endBoss.lifePoints);
+        } else {
+            this.deadEndBoss(endBoss);
+        }
+    }
+
+    deadEndBoss(endBoss) {
+        this.world.level.statusBar[3].setPercentage(0);
+        clearInterval(endBoss.enableMovment);
+        setTimeout(() => {
+            clearInterval(endBoss.animate);
+        }, 550);
     }
 
 }
