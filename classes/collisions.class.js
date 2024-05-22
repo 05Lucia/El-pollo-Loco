@@ -81,8 +81,11 @@ class Collisions {
             const endBoss = this.world.level.enemies[this.world.level.enemies.length - 1];
             if (bottle.isColliding(endBoss)&& this.wasHurt(this.world.level.enemies[this.world.level.enemies.length - 1])) {
                 endBoss.hit(35);
-                // this.world.level.statusBar[0].setPercentage(enemy.lifePoints);
-                
+                if (endBoss.lifePoints >= 0) {
+                    this.world.level.statusBar[3].setPercentage(endBoss.lifePoints);
+                } else {
+                    this.world.level.statusBar[3].setPercentage(0);
+                }   
             }
         })
     }

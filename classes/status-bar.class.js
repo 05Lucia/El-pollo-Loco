@@ -1,9 +1,9 @@
 class StatusBar extends DrawableObject {
     IMG_STATS= [];
-    x = 40;
+    x = 30;
     y = 0;
-    width = 200;
-    height = 90;
+    width = 160;
+    height = 60;
     percentage = 100;
 
     constructor(x, imgs, precent) {
