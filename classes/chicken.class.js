@@ -22,7 +22,7 @@ class Chicken extends MovebaleObject {
     }
     
     enableMovment = setInterval(() => {
-        this.moveLeft();
+        this.moveLeft(this.speed);
     }, 1000 / 60);
 
     animate() {

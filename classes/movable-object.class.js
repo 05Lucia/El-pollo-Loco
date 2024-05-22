@@ -45,18 +45,17 @@ class MovebaleObject extends DrawableObject {
         if (this.lifePoints > 0) {
             this.lifePoints -= hitPoints;
             this.lastHit = new Date().getTime();
-            console.log('LP:', this.lifePoints);
         }
     }
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // Differenc in ms
         timePassed = timePassed / 1000 // in s
-        return timePassed < 0.3;
+        return timePassed < 0.5;
     }
 
     isDead() {
-        if (this.lifePoints === 0) {
+        if (this.lifePoints <= 0) {
             return true;
         }
     }
@@ -65,7 +64,7 @@ class MovebaleObject extends DrawableObject {
         this.x += this.speed;
     }
 
-    moveLeft() {
+    moveLeft(speed) {
         this.x -= this.speed;
     }
 

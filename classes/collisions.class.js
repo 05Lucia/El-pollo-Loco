@@ -8,11 +8,12 @@ class Collisions {
         this.collisionChicken();
         this.collisionCoin();
         this.collisionSalsa();
-        collisionBoss();
+        this.collisionBoss();
+        this.collisionThrowenSalsa();
     }
 
-    wasHurt() {
-        let timePassed = new Date().getTime() - this.world.character.lastHit; // Differenc in ms
+    wasHurt(mo) {
+        let timePassed = new Date().getTime() - mo.lastHit; // Differenc in ms
         return timePassed >= 450;
     }
 
@@ -27,7 +28,7 @@ class Collisions {
                     enemy.lifePoints = 0;
                 } if (this.world.character.isColliding(enemy) &&
                     !(enemy.isDead()) &&
-                    this.wasHurt()) {
+                    this.wasHurt(this.world.character)) {
                     this.world.character.hit(10);
                     this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
                 }
@@ -49,7 +50,7 @@ class Collisions {
             if (this.world.character.isColliding(salsa) && salsa.speedY === 0) {
                 salsa.applyGravity();
                 this.salsaPrecent += 20;
-                this.world.level.statusBar[2].setPercentage(this.salsaPrecent)
+                this.world.level.statusBar[2].setPercentage(this.salsaPrecent);
                 this.salsaBottle++;
             }
         });
@@ -66,20 +67,24 @@ class Collisions {
                     !(enemy.isDead()) &&
                     this.wasHurt()) {
                     this.world.character.hit(20);
-                    this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
+                    if (this.world.character.lifePoints >= 0) {
+                        this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
+                    } else {
+                        this.world.level.statusBar[0].setPercentage(0);
+                    }
                 }
             })
     }
 
     collisionThrowenSalsa() {
         this.world.throwableObjects.forEach((bottle) => {
-            if (bottle.isColliding(this.world.enemies.filter(
-                (enemy) =>
-                    enemy instanceof Endboss
-            ))) {
-                this.world.enemy.hit(20);
-                this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
+            const endBoss = this.world.level.enemies[this.world.level.enemies.length - 1];
+            if (bottle.isColliding(endBoss)&& this.wasHurt(this.world.level.enemies[this.world.level.enemies.length - 1])) {
+                endBoss.hit(35);
+                // this.world.level.statusBar[0].setPercentage(enemy.lifePoints);
+                
             }
         })
     }
+
 }

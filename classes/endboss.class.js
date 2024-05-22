@@ -8,22 +8,46 @@ class Endboss extends MovebaleObject {
         './img/4_enemie_boss_chicken/1_walk/G3.png',
         './img/4_enemie_boss_chicken/1_walk/G4.png'
     ];
+    IMG_DEAD = [
+        './img/4_enemie_boss_chicken/5_dead/G24.png',
+        './img/4_enemie_boss_chicken/5_dead/G25.png',
+        './img/4_enemie_boss_chicken/5_dead/G26.png'
+    ];
+    IMG_HURT = [
+        './img/4_enemie_boss_chicken/4_hurt/G21.png',
+        './img/4_enemie_boss_chicken/4_hurt/G22.png',
+        './img/4_enemie_boss_chicken/4_hurt/G23.png'
+    ];
     lifePoints = 100;
+    speed = 0.3;
 
     constructor() {
         super().loadeImage('./img/4_enemie_boss_chicken/1_walk/G1.png');
         this.loadeImages(this.IMG_WALKING);
+        this.loadeImages(this.IMG_DEAD);
+        this.loadeImages(this.IMG_HURT);
         this.animate();
-        this.x = 2500;
+        this.x = 2400;
     }
 
-    animate() {
-        setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60);
+    enableMovment = setInterval(() => {
+        this.moveLeft();
+    }, 1000 / 60);
 
+    animate() {
+        this.enableAnimation();
+    }
+
+    enableAnimation() {
         setInterval(() => {
-            this.playAnimation(this.IMG_WALKING);
-        }, 350)
+            if (this.isDead()) {
+                this.playAnimation(this.IMG_DEAD);
+                clearInterval(this.enableMovment);
+            } else if (this.isHurt(this.speed)) {
+                this.playAnimation(this.IMG_HURT);
+            } else {
+                this.playAnimation(this.IMG_WALKING);
+            }
+        }, 200)
     }
 }

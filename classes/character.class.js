@@ -120,7 +120,7 @@ class Character extends MovebaleObject {
             this.otherDirection = false;
         }
         if (this.world.keyboard.LEFT && this.x > -600) {
-            this.moveLeft();
+            this.moveLeft(this.speed);
             this.otherDirection = true;
         }
         this.world.camera_x = -this.x + 100;
