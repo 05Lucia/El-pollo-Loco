@@ -4,7 +4,7 @@ class MovebaleObject extends DrawableObject {
     speedY = 0;
     acceleration = 1.5;
     lifePoints = 100;
-    lastHit = 0;
+    lastHit = 1;
 
     applyGravity() {
         setInterval(() => {
@@ -18,7 +18,7 @@ class MovebaleObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) {
+        if (this instanceof ThrowableObject || this instanceof CollectableObjects) {
             return true
         } else {
             return this.y < 130;
@@ -41,18 +41,18 @@ class MovebaleObject extends DrawableObject {
     // }
 
 
-    hit() {
+    hit(hitPoints) {
         if (this.lifePoints > 0) {
-            this.lifePoints -= 5;
-            console.log('colision with Character LP', this.lifePoints);
+            this.lifePoints -= hitPoints;
             this.lastHit = new Date().getTime();
+            console.log('LP:', this.lifePoints);
         }
     }
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // Differenc in ms
         timePassed = timePassed / 1000 // in s
-        return timePassed < 1;
+        return timePassed < 0.3;
     }
 
     isDead() {

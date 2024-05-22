@@ -5,7 +5,8 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    
+    collistions = new Collisions();
+    lastThrow = 300;
     throwableObjects = [];
 
     constructor(canvas, keyboard) {
@@ -14,34 +15,35 @@ class World {
         this.keyboard = keyboard
         this.draw();
         this.setWorld();
-        this.run();
+        this.constantRepeat();
     }
 
     setWorld() {
         this.character.world = this;
+        this.collistions.world = this; 
     }
 
-    run() {
+    constantRepeat() {
         setInterval(() => {
-            this.checkCollisions();
+            this.collistions.checkCollisions();
             this.throwObjects();
-        }, 200);
-    }
-
-    checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.level.statusBar[0].setPercentage(this.character.lifePoints);
-            }
-        })
+        }, 1000/ 20);
     }
 
     throwObjects() {
-        if (this.keyboard.THROW) {
+        if (this.keyboard.THROW && this.collistions.salsaBottle != 0 && this.throwBrake()) {
             let bottle = new ThrowableObject(this.character.x +100 , this.character.y + 100);
             this.throwableObjects.push(bottle);
+            this.collistions.salsaBottle--;
+            this.collistions.salsaPrecent -= 20;
+            this.level.statusBar[2].setPercentage(this.collistions.salsaPrecent)
+            this.lastThrow = new Date().getTime();
         }
+    }
+
+    throwBrake() {
+        let timePassed = new Date().getTime() - this.lastThrow; // Differenc in ms
+        return timePassed >= 200;
     }
 
     draw() {
@@ -54,7 +56,6 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // ---------- space for fixd objects ------------! 
         this.addObjectsToMap(this.level.statusBar);
-
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.salsaBottles);

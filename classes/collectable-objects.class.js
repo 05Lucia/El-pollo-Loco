@@ -1,4 +1,4 @@
-class CollectableObjects extends DrawableObject{
+class CollectableObjects extends MovebaleObject{
     y = 180;
     height = 100;
     width = 100;
