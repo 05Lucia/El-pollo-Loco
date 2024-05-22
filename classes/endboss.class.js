@@ -8,6 +8,7 @@ class Endboss extends MovebaleObject {
         './img/4_enemie_boss_chicken/1_walk/G3.png',
         './img/4_enemie_boss_chicken/1_walk/G4.png'
     ];
+    lifePoints = 100;
 
     constructor() {
         super().loadeImage('./img/4_enemie_boss_chicken/1_walk/G1.png');

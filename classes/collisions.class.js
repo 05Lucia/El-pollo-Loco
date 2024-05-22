@@ -8,6 +8,7 @@ class Collisions {
         this.collisionChicken();
         this.collisionCoin();
         this.collisionSalsa();
+        collisionBoss();
     }
 
     wasHurt() {
@@ -44,7 +45,7 @@ class Collisions {
     }
 
     collisionSalsa() {
-        this.world.level.salsaBottles.forEach( salsa => {
+        this.world.level.salsaBottles.forEach(salsa => {
             if (this.world.character.isColliding(salsa) && salsa.speedY === 0) {
                 salsa.applyGravity();
                 this.salsaPrecent += 20;
@@ -54,19 +55,31 @@ class Collisions {
         });
     }
 
-    collisionBoss(){
+    collisionBoss() {
         this.world.level.enemies
             .filter(
                 (enemy) =>
                     enemy instanceof Endboss
             )
             .forEach((enemy) => {
-                 if (this.world.character.isColliding(enemy) &&
+                if (this.world.character.isColliding(enemy) &&
                     !(enemy.isDead()) &&
                     this.wasHurt()) {
-                    this.world.character.hit(10);
+                    this.world.character.hit(20);
                     this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
                 }
             })
+    }
+
+    collisionThrowenSalsa() {
+        this.world.throwableObjects.forEach((bottle) => {
+            if (bottle.isColliding(this.world.enemies.filter(
+                (enemy) =>
+                    enemy instanceof Endboss
+            ))) {
+                this.world.enemy.hit(20);
+                this.world.level.statusBar[0].setPercentage(this.world.character.lifePoints);
+            }
+        })
     }
 }
