@@ -9,8 +9,7 @@ class SmallChicken extends MovebaleObject {
     ]
     IMG_DEAD = [
         './img/3_enemies_chicken/chicken_small/2_dead/dead.png'
-    ]
-    chicken_sound = new Audio('')
+    ];
     lifePoints = 10;
 
 
@@ -42,13 +41,6 @@ class SmallChicken extends MovebaleObject {
                 this.playAnimation(this.IMG_WALKING_CHICKEN);
             }
         }, 300)
-    }
-
-    sound() {
-        setInterval(() => {
-            
-            this.chicken_sound.volume = 0.1;
-        }, 230)
     }
 
 }

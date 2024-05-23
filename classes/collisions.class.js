@@ -25,6 +25,7 @@ class Collisions {
             .forEach((enemy) => {
                 if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround(130)) {
                     enemy.lifePoints = 0;
+                    enemy.chicken_sound.play();
                 } else if (this.world.character.isColliding(enemy) && !(enemy.isDead()) && this.wasHurt(this.world.character)) {
                     this.characterHurting();
                 } else if (this.world.character.isDead()) {
@@ -126,6 +127,7 @@ class Collisions {
             .forEach((enemy) => {
             if (bottle.isColliding(enemy) && this.wasHurt(enemy) && bottle.activ === true) {
                 enemy.lifePoints = 0;
+                enemy.chicken_sound.play();
                 bottle.salsaHit();
                 setTimeout(() => {
                     clearInterval(bottle.spalsh);
