@@ -10,6 +10,7 @@ class World {
     throwableObjects = [];
     background_sound = new Audio('./audio/happy background loop.mp3');
     winning_sound = new Audio ('./audio/winning.mp3')
+    backgroundSound;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -18,6 +19,7 @@ class World {
         this.draw();
         this.setWorld();
         this.constantRepeat();
+        this.backgroundMusic();
     }
 
     setWorld() {
@@ -29,13 +31,18 @@ class World {
         setInterval(() => {
             this.collistions.checkCollisions();
             this.throwObjects();
-            // this.background_sound.volume = 0.07;
-            // this.background_sound.play(); // -------------------- put a mute button in!!!!!
         }, 1000 / 60);
     }
 
+    backgroundMusic() {
+        this.backgroundSound = setInterval(() => {
+            this.background_sound.volume = 0.07;
+            // this.background_sound.play();// -------------------- put a mute button in!!!!!
+        }, 1000/25);
+    }
+
     won() {
-        this.winning_sound.play
+        this.winning_sound.play();
     }
 
     throwObjects() {
@@ -46,6 +53,7 @@ class World {
             this.collistions.salsaPrecent -= 20;
             this.level.statusBar[2].setPercentage(this.collistions.salsaPrecent)
             this.lastThrow = new Date().getTime();
+            this.character.idleEnd();
         }
     }
 

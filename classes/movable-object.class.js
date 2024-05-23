@@ -5,6 +5,7 @@ class MovebaleObject extends DrawableObject {
     acceleration = 1.5;
     lifePoints = 100;
     lastHit = 1;
+    chicken_sound = new Audio('./audio/chicken.mp3')
 
     applyGravity(ground) {
         setInterval(() => {

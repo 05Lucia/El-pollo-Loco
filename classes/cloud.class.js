@@ -6,7 +6,6 @@ class Cloude extends MovebaleObject {
 
     constructor(img) {
         super().loadeImage(img);
-
         this.x = Math.random() * 2700;
         this.animate();
     }

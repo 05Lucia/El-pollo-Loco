@@ -113,9 +113,11 @@ class Collisions {
     deadEndBoss(endBoss) {
         this.world.level.statusBar[3].setPercentage(0);
         clearInterval(endBoss.enableMovment);
+        clearInterval(this.world.character.idelAnimation)
         setTimeout(() => {
             clearInterval(endBoss.animate);
         }, 550);
+        this.world.won();
     }
 
     collisionSalsaHitChiken() {
