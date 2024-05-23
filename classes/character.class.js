@@ -74,7 +74,7 @@ class Character extends MovebaleObject {
         this.loadeImages(this.IMG_IDLE_LONG);
         this.loadeImages(this.IMG_DEAD);
         this.loadeImages(this.IMG_HURT);
-        this.applyGravity();
+        this.applyGravity(130);
         this.idleStart();
     }
 
@@ -89,9 +89,9 @@ class Character extends MovebaleObject {
     }
 
     idelAnimation = setInterval(() => {
-        if (!(this.isAboveGround()) && this.idleTime() && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
+        if (!(this.isAboveGround(130)) && this.idleTime() && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
             this.playAnimation(this.IMG_IDLE_LONG);
-        } if (!(this.isAboveGround()) && (!(this.idleTime()) || this.startIdle === 0) && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
+        } if (!(this.isAboveGround(130)) && (!(this.idleTime()) || this.startIdle === 0) && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
             this.playAnimation(this.IMG_IDLE);
             if (this.startIdle === 0) {
                 this.idleStart();
@@ -123,7 +123,7 @@ class Character extends MovebaleObject {
 
     enableMovment = setInterval(() => {
         this.enableWalking();
-        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+        if (this.world.keyboard.SPACE && !this.isAboveGround(130)) {
             this.idleEnd();
             this.jump();
             this.jumpingSound();
@@ -146,7 +146,7 @@ class Character extends MovebaleObject {
             this.moveLeft(this.speed);
             this.otherDirection = true;
         }
-        this.world.camera_x = -this.x + 100;
+        this.world.camera_x = -this.x + 90;
     }
 
     jump() {

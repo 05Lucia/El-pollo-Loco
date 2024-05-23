@@ -9,7 +9,9 @@ class Collisions {
         this.collisionCoin();
         this.collisionSalsa();
         this.collisionBoss();
-        this.collisionThrowenSalsa();
+        this.collisionSalsaHitBoss();
+        this.collisionSalsaHitChiken();
+        this.closnesToBoss();
     }
 
     wasHurt(mo) {
@@ -21,7 +23,7 @@ class Collisions {
         this.world.level.enemies
             .filter((enemy) => enemy instanceof Chicken || enemy instanceof SmallChicken)
             .forEach((enemy) => {
-                if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround()) {
+                if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround(130)) {
                     enemy.lifePoints = 0;
                 } else if (this.world.character.isColliding(enemy) && !(enemy.isDead()) && this.wasHurt(this.world.character)) {
                     this.characterHurting();
@@ -50,21 +52,23 @@ class Collisions {
 
     collisionCoin() {
         this.world.level.coins.forEach(coin => {
-            if (this.world.character.isAboveGround() && this.world.character.isColliding(coin) && coin.speedY === 0) {
-                coin.applyGravity();
+            if (this.world.character.isAboveGround(130) && this.world.character.isColliding(coin) && coin.speedY === 0 && coin.activ === true) {
+                coin.applyGravity(500);
                 this.coins += 20;
                 this.world.level.statusBar[1].setPercentage(this.coins)
+                coin.activ = false;
             }
         });
     }
 
     collisionSalsa() {
         this.world.level.salsaBottles.forEach(salsa => {
-            if (this.world.character.isColliding(salsa) && salsa.speedY === 0) {
-                salsa.applyGravity();
+            if (this.world.character.isColliding(salsa) && salsa.speedY === 0 && salsa.activ === true) {
+                salsa.applyGravity(500);
                 this.salsaPrecent += 20;
                 this.world.level.statusBar[2].setPercentage(this.salsaPrecent);
                 this.salsaBottle++;
+                salsa.activ = false;
             }
         });
     }
@@ -83,11 +87,15 @@ class Collisions {
             });
     }
 
-    collisionThrowenSalsa() {
+    collisionSalsaHitBoss() {
         this.world.throwableObjects.forEach((bottle) => {
             const endBoss = this.world.level.enemies[this.world.level.enemies.length - 1];
-            if (bottle.isColliding(endBoss) && this.wasHurt(this.world.level.enemies[this.world.level.enemies.length - 1])) {
+            if (bottle.isColliding(endBoss) && this.wasHurt(endBoss) && bottle.activ === true) {
                 this.hitEndBoss(endBoss);
+                bottle.salsaHit();
+                setTimeout(() => {
+                    clearInterval(bottle.spalsh);
+                }, 1000);
             }
         })
     }
@@ -98,6 +106,7 @@ class Collisions {
             this.world.level.statusBar[3].setPercentage(endBoss.lifePoints);
         } else {
             this.deadEndBoss(endBoss);
+            // this.world.won();
         }
     }
 
@@ -107,6 +116,27 @@ class Collisions {
         setTimeout(() => {
             clearInterval(endBoss.animate);
         }, 550);
+    }
+
+    collisionSalsaHitChiken() {
+        this.world.throwableObjects.forEach((bottle) => {
+            this.world.level.enemies.filter((enemy) => enemy instanceof Chicken || enemy instanceof SmallChicken)
+            .forEach((enemy) => {
+            if (bottle.isColliding(enemy) && this.wasHurt(enemy) && bottle.activ === true) {
+                enemy.lifePoints = 0;
+                bottle.salsaHit();
+                setTimeout(() => {
+                    clearInterval(bottle.spalsh);
+                }, 1000);
+            }})
+        })
+    }
+
+    closnesToBoss() {
+        const endBoss = this.world.level.enemies[this.world.level.enemies.length - 1];
+        if (this.world.character.isClose(endBoss)) {
+            endBoss.alerted = true;
+        }
     }
 
 }

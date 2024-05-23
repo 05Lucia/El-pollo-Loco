@@ -8,6 +8,8 @@ class World {
     collistions = new Collisions();
     lastThrow = 300;
     throwableObjects = [];
+    background_sound = new Audio('./audio/happy background loop.mp3');
+    winning_sound = new Audio ('./audio/winning.mp3')
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -20,19 +22,25 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.collistions.world = this; 
+        this.collistions.world = this;
     }
 
     constantRepeat() {
         setInterval(() => {
             this.collistions.checkCollisions();
             this.throwObjects();
-        }, 1000/ 25);
+            // this.background_sound.volume = 0.07;
+            // this.background_sound.play(); // -------------------- put a mute button in!!!!!
+        }, 1000 / 60);
+    }
+
+    won() {
+        this.winning_sound.play
     }
 
     throwObjects() {
         if (this.keyboard.THROW && this.collistions.salsaBottle != 0 && this.throwBrake()) {
-            let bottle = new ThrowableObject(this.character.x +100 , this.character.y + 100);
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
             this.collistions.salsaBottle--;
             this.collistions.salsaPrecent -= 20;
@@ -60,9 +68,9 @@ class World {
 
         this.addObjectsToMap(this.level.salsaBottles);
         this.addObjectsToMap(this.level.coins)
-        this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 

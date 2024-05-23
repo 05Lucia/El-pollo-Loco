@@ -6,22 +6,22 @@ class MovebaleObject extends DrawableObject {
     lifePoints = 100;
     lastHit = 1;
 
-    applyGravity() {
+    applyGravity(ground) {
         setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {
+            if (this.isAboveGround(ground) || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
-            } if (!(this.isAboveGround())) {
+            } if (!(this.isAboveGround(ground))) {
                 this.speedY = 0;
             }
         }, 1000 / 60)
     }
 
-    isAboveGround() {
-        if (this instanceof ThrowableObject || this instanceof CollectableObjects) {
+    isAboveGround(ground) {
+        if (this instanceof CollectableObjects) {
             return true
         } else {
-            return this.y < 130;
+            return this.y < ground;
         }
     }
 
@@ -64,6 +64,11 @@ class MovebaleObject extends DrawableObject {
         let path = imgArray[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }
+
+    isClose(mo) {
+        let distance = mo.x - (this.x + this.width) 
+        return distance < 300;
     }
 
 }

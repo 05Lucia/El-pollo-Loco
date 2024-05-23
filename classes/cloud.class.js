@@ -4,10 +4,10 @@ class Cloude extends MovebaleObject {
     width = 500;
 
 
-    constructor() {
-        super().loadeImage('./img/5_background/layers/4_clouds/1.png');
+    constructor(img) {
+        super().loadeImage(img);
 
-        this.x = Math.random() * 500;
+        this.x = Math.random() * 2700;
         this.animate();
     }
 
