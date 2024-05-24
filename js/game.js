@@ -9,11 +9,11 @@ function init() {
 }
 
 document.addEventListener('keydown', (event) => {
-    if (event.code == "KeyD" || event.code == "ArrowRight") {
+    if (event.code == "ArrowRight") {
         keyboard.RIGHT = true;
     }
     
-    if (event.code == "KeyA" || event.code == "ArrowLeft") {
+    if (event.code == "ArrowLeft") {
         keyboard.LEFT = true;
     }
 
@@ -21,7 +21,7 @@ document.addEventListener('keydown', (event) => {
         keyboard.SPACE = true;
     }
 
-    if (event.code === "KeyF" || event.code =="ShiftLeft") {
+    if (event.code === "KeyF") {
         keyboard.THROW = true;
     }
 });
@@ -29,11 +29,11 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keypress', (event) => {})
 
 document.addEventListener('keyup', (event) => {
-    if (event.code == "KeyD" || event.code == "ArrowRight") {
+    if (event.code == "ArrowRight") {
         keyboard.RIGHT = false;
     }
     
-    if (event.code == "KeyA" || event.code == "ArrowLeft") {
+    if (event.code == "ArrowLeft") {
         keyboard.LEFT = false;
     }
 
@@ -41,7 +41,7 @@ document.addEventListener('keyup', (event) => {
         keyboard.SPACE = false;
     }
 
-    if (event.code === "KeyF" || event.code =="ShiftLeft") {
+    if (event.code === "KeyF") {
         keyboard.THROW = false;
     }
 });

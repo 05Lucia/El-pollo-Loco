@@ -9,8 +9,14 @@ class World {
     lastThrow = 300;
     throwableObjects = [];
     background_sound = new Audio('./audio/happy background loop.mp3');
-    winning_sound = new Audio ('./audio/winning.mp3')
+    winning_sound = new Audio('./audio/winning.mp3')
+    losing_sound = new Audio('audio/lost.mp3')
     backgroundSound;
+    keepChecking;
+    animationRequest;
+    gameOver = false;
+    endScreen = 0;
+    gameEnde = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -28,9 +34,10 @@ class World {
     }
 
     constantRepeat() {
-        setInterval(() => {
+        this.keepChecking = setInterval(() => {
             this.collistions.checkCollisions();
             this.throwObjects();
+            this.lost();
         }, 1000 / 60);
     }
 
@@ -38,11 +45,29 @@ class World {
         this.backgroundSound = setInterval(() => {
             this.background_sound.volume = 0.07;
             // this.background_sound.play();// -------------------- put a mute button in!!!!!
-        }, 1000/25);
+        }, 1000 / 25);
     }
 
     won() {
         this.winning_sound.play();
+        this.endScreen = new EndScreen('./img/9_intro_outro_screens/win/won_2.png')
+        this.gameEnded();
+    }
+
+    lost() {
+        if (this.gameOver === true) {
+            this.losing_sound.play();
+            this.endScreen = new EndScreen('./img/9_intro_outro_screens/game_over/game over.png')
+            this.gameEnded();
+        }
+    }
+
+    gameEnded() {
+        clearInterval(this.keepChecking);
+        setTimeout(() => {
+            cancelAnimationFrame(this.animationRequest);
+        }, 500);
+        this.gameEnde = true;
     }
 
     throwObjects() {
@@ -65,25 +90,34 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
+        this.movableObjectsOnScreen();
+        this.staticObjectsOnScreen();
+        this.ctx.translate(-this.camera_x, 0);
+        this.drawAnimation();
+    }
 
+    movableObjectsOnScreen() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
-
-        this.ctx.translate(-this.camera_x, 0);
-        // ---------- space for fixd objects ------------! 
-        this.addObjectsToMap(this.level.statusBar);
-        this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.salsaBottles);
         this.addObjectsToMap(this.level.coins)
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
+    }
 
+    staticObjectsOnScreen() {
         this.ctx.translate(-this.camera_x, 0);
+        this.addObjectsToMap(this.level.statusBar);
+        if (this.endScreen != 0) {
+            this.addToMap(this.endScreen);
+        }
+        this.ctx.translate(this.camera_x, 0);
+    }
 
+    drawAnimation() {
         let self = this;
-        requestAnimationFrame(function () {// draw() wird immer wieder aufgerufen.
+        this.animationRequest = requestAnimationFrame(function () {// draw() wird immer wieder aufgerufen.
             self.draw();
         });
     }
@@ -98,10 +132,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImg(mo);
         }
-
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
-
         if (mo.otherDirection) {
             this.flipImgBack(mo);
         }
@@ -118,6 +149,5 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();// reset damit alles andere nicht spiegel verkehrt ist!! 
     }
-
 
 }

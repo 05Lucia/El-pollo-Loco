@@ -61,6 +61,9 @@ class Character extends MovebaleObject {
         './img/2_character_pepe/4_hurt/H-42.png',
         './img/2_character_pepe/4_hurt/H-43.png',
     ];
+    IMG_GAMEOVER = [
+        './img/9_intro_outro_screens/game_over/game over.png'
+    ]
     world;
     startIdle = 0;
     running_sound = new Audio('./audio/running.mp3');
@@ -74,6 +77,7 @@ class Character extends MovebaleObject {
         this.loadeImages(this.IMG_IDLE_LONG);
         this.loadeImages(this.IMG_DEAD);
         this.loadeImages(this.IMG_HURT);
+        this.loadeImages(this.IMG_GAMEOVER);
         this.applyGravity(130);
         this.idleStart();
     }
@@ -99,14 +103,16 @@ class Character extends MovebaleObject {
         }
     }, 500);
 
-    idleEnd(){
+    idleEnd(){ 
         this.startIdle = 0;
     }
 
     animation = setInterval(() => {
         this.running_sound.pause();
         if (this.isDead()) {
+            this.world.gameOver=true;
             this.playAnimation(this.IMG_DEAD);
+            
         } else if (this.isHurt()) {
             this.idleEnd();
             this.playAnimation(this.IMG_HURT);

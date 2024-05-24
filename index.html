@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,19 +19,37 @@
     <script src="classes/throwabel-object.class.js"></script>
     <script src="classes/background-objeckt.class.js"></script>
     <script src="classes/collectable-objects.class.js"></script>
+    <script src="classes/end-screean.class.js"></script>
     <script src="classes/collisions.class.js"></script>
     <script src="classes/keyboard.class.js"></script>
     <script src="classes/level.class.js"></script>
     <script src="levels/level1.js"></script>
-    
+
     <script src="js/game.js"></script>
 </head>
-<body onload="init()">
-    <h1 translate="no">El pollo loco</h1>
-    <canvas width="720" height="480" id="canvas">
 
-    </canvas>
-<footer><a href="https://www.chosic.com/free-music/all/">musik</a> </footer>
+<body onload="init()">
+    <div class="main-container">
+        <div class="top-container">
+            <h1 translate="no">El pollo loco</h1>
+            <div class="game-arrea">
+                <div class="help-bar">
+                    <h2 class="title">Info</h2>
+                    <h3>Laufe Rechts</h3>
+                    <h2>Rechts</h2>
+                    <h3>Laufe Links</h3>
+                    <h2>Links</h2>
+                    <h3>Springen</h3>
+                    <h2>Lehrtaste</h2>
+                    <h3>Werfen</h3>
+                    <h2>F</h2>
+                </div>
+                <canvas width="740" height="480" id="canvas"></canvas>
+            </div>
+        </div>
+
+        <footer><a href="https://www.chosic.com/free-music/all/">musik</a> </footer>
+    </div>
 </body>
 
 </html>
