@@ -21,11 +21,12 @@ class World {
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
         this.canvas = canvas;
-        this.keyboard = keyboard
+        this.keyboard = keyboard;
         this.draw();
         this.setWorld();
         this.constantRepeat();
         this.backgroundMusic();
+        
     }
 
     setWorld() {

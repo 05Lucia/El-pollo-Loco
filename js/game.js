@@ -1,11 +1,32 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let gameEndInterval;
 
-
-function init() {
+function InitiateGame() {
     canvas = document.getElementById('canvas');
+    canvas.classList.remove('d-none');
+    document.getElementById('start-screen').classList.add('d-none');
+    intLevel1();
     world = new World(canvas, keyboard);
+    checkForGameEnd();
+}
+
+function checkForGameEnd() {
+    gameEndInterval = setInterval(() => {
+        if (world.gameEnde === true) {
+             document.getElementById('restart').classList.remove('d-none');
+        }
+    }, 1000 / 60);
+}
+
+function reset() {
+    world = null;
+    level1 = null;
+    document.getElementById('restart').classList.add('d-none');
+    canvas.classList.add('d-none');
+    clearInterval (gameEndInterval);
+    document.getElementById('start-screen').classList.remove('d-none');
 }
 
 document.addEventListener('keydown', (event) => {

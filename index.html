@@ -31,10 +31,10 @@
 <body onload="init()">
     <div class="main-container">
         <div class="top-container">
-            <h1 translate="no">El pollo loco</h1>
+            <h1 translate="no">El Pollo Loco</h1>
             <div class="game-arrea">
                 <div class="help-bar">
-                    <h2 class="title">Info</h2>
+                    <h2 class="title">Tasten</h2>
                     <h3>Laufe Rechts</h3>
                     <h2>Rechts</h2>
                     <h3>Laufe Links</h3>
@@ -44,8 +44,12 @@
                     <h3>Werfen</h3>
                     <h2>F</h2>
                 </div>
-                <canvas width="740" height="480" id="canvas"></canvas>
+                <canvas width="740" height="480" id="canvas" class="d-none"></canvas>
+                <div class="start-screen" id="start-screen">
+                    <button class="start-btn" onclick="InitiateGame()">Spiel Starten</button>
+                </div>
             </div>
+            <button class="restart d-none" id="restart" onclick="reset()"> Neustart </button>
         </div>
 
         <footer><a href="https://www.chosic.com/free-music/all/">musik</a> </footer>
