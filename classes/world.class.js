@@ -45,7 +45,7 @@ class World {
     backgroundMusic() {
         this.backgroundSound = setInterval(() => {
             this.background_sound.volume = 0.07;
-            // this.background_sound.play();// -------------------- put a mute button in!!!!!
+            this.background_sound.play();// -------------------- put a mute button in!!!!!
         }, 1000 / 25);
     }
 

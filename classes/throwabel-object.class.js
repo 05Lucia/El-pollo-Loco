@@ -46,7 +46,6 @@ class ThrowableObject extends MovebaleObject {
                 clearInterval(this.spalsh);
             }, 1000);
         }
-
     }, 25);
 
     animateTrow = setInterval(() => {

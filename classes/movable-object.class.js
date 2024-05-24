@@ -70,7 +70,7 @@ class MovebaleObject extends DrawableObject {
 
     isClose(mo) {
         let distance = mo.x - (this.x + this.width) 
-        return distance < 300;
+        return distance < 290;
     }
 
 }

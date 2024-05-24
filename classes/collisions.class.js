@@ -91,7 +91,7 @@ class Collisions {
     collisionSalsaHitBoss() {
         this.world.throwableObjects.forEach((bottle) => {
             const endBoss = this.world.level.enemies[this.world.level.enemies.length - 1];
-            if (bottle.isColliding(endBoss) && this.wasHurt(endBoss) && bottle.activ === true) {
+            if (bottle.isColliding(endBoss) && bottle.activ === true) {
                 this.hitEndBoss(endBoss);
                 bottle.salsaHit();
                 setTimeout(() => {

@@ -1,7 +1,7 @@
 *{
     box-sizing: border-box;
     margin: 0;
-    font-family:'ray', Arial, Helvetica, sans-serif;
+    
 }
 
 @font-face {
@@ -10,11 +10,18 @@
     src: url('./font/Rye-Regular.ttf') format('truetype');
   }
 
+  @font-face {
+    font-family: 'roboto';
+    font-style: normal;
+    src: url('./font/Roboto-Regular.ttf') format('truetype');
+  }
+
 body {
     min-height: 100vh;
     background-image: url(./img/5_background/desert-background.jpg);
     background-position: center;
     background-size: cover;
+    font-family:'ray', Arial, Helvetica, sans-serif;
 }
 
 .d-none {
@@ -63,8 +70,8 @@ body {
 }
 
 .start-btn {
-    position: absolute;
-    margin-top: 4rem;
+    position: absolute; 
+    margin-top: 3rem;
     background-color: transparent;
     border: none;
     font-size: 2rem;
@@ -100,6 +107,16 @@ canvas {
     background-color: black;
     border: 10px ridge #F8D995;
     box-shadow: 0px 0px 9px 2px black;
+    display: block;
+}
+
+button {
+    font-family:'ray', Arial, Helvetica, sans-serif;
+}
+
+button:hover {
+    cursor: pointer;
+    font-size: 2.5rem;
 }
 
 h1 {
@@ -118,7 +135,106 @@ h2 {
     color: #dc7500;
 }
 
+footer {
+    display: flex;
+    gap: 2rem;
+}
+
+footer a {
+    text-shadow: 0px 0px 6px #fde2aa;
+}
+
 a {
     color: rgb(33, 34, 0);
     font-style: italic;
+    text-decoration: underline;
+    font-family:'ray', Arial, Helvetica, sans-serif;
 }
+
+a:hover {
+    cursor: pointer;
+}
+
+
+.privacy-policy-body {
+    width: 100%;
+    background-image: none;
+    font-family:'roboto' , Arial, Helvetica, sans-serif !important;
+    padding: 2rem 1rem;
+}
+
+.privacy-policy {
+    width: 100%;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 16px;
+    font-family:'roboto' , Arial, Helvetica, sans-serif !important;
+}
+
+.privacy-policy a {
+    font-family:'roboto' , Arial, Helvetica, sans-serif !important;
+}
+
+.privacy-policy-body h1 {
+    padding-top: 4rem;
+    text-align: center;
+    text-shadow: none;
+    font-size: 3rem;
+}
+
+.privacy-policy-body img:hover {
+    cursor: pointer;
+}
+
+.privacy-policy-body h2 {
+    padding-top: 16px;
+}
+
+@media (max-width: 740px) {
+    canvas {
+        width: 100%;
+    }
+    .game-arrea {
+        width: 100%;
+    }
+    .top-container {
+        width: 100%;
+    }
+    footer {
+        display: none;
+    }
+    .main-container {
+        padding: 0;
+    }
+    .top-container h1 {
+        font-size: 2rem;
+        padding-top: 2rem;
+    }
+}
+
+@media (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+    .game-arrea {
+        height: 100vh;
+    }
+    .top-container {
+        height: 100vh;
+        margin-top: 0;
+    }
+    .main-container {
+        padding: 0;
+    }
+    .top-container h1 {
+        display: none;
+    }
+    .start-btn {
+        margin-top: 1rem;
+    }
+    
+}
+
