@@ -1,27 +1,27 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
-    
+
 }
 
 @font-face {
     font-family: 'ray';
     font-style: normal;
     src: url('./font/Rye-Regular.ttf') format('truetype');
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: 'roboto';
     font-style: normal;
     src: url('./font/Roboto-Regular.ttf') format('truetype');
-  }
+}
 
 body {
     min-height: 100vh;
     background-image: url(./img/5_background/desert-background.jpg);
     background-position: center;
     background-size: cover;
-    font-family:'ray', Arial, Helvetica, sans-serif;
+    font-family: 'ray', Arial, Helvetica, sans-serif;
 }
 
 .d-none {
@@ -61,7 +61,7 @@ body {
     height: 100%;
     width: 100%;
     background-image: url(./img/9_intro_outro_screens/start/startscreen_1.png);
-    background-size:100% 100%;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -70,7 +70,7 @@ body {
 }
 
 .start-btn {
-    position: absolute; 
+    position: absolute;
     margin-top: 3rem;
     background-color: transparent;
     border: none;
@@ -111,7 +111,7 @@ canvas {
 }
 
 button {
-    font-family:'ray', Arial, Helvetica, sans-serif;
+    font-family: 'ray', Arial, Helvetica, sans-serif;
 }
 
 button:hover {
@@ -148,7 +148,7 @@ a {
     color: rgb(33, 34, 0);
     font-style: italic;
     text-decoration: underline;
-    font-family:'ray', Arial, Helvetica, sans-serif;
+    font-family: 'ray', Arial, Helvetica, sans-serif;
 }
 
 a:hover {
@@ -159,7 +159,7 @@ a:hover {
 .privacy-policy-body {
     width: 100%;
     background-image: none;
-    font-family:'roboto' , Arial, Helvetica, sans-serif !important;
+    font-family: 'roboto', Arial, Helvetica, sans-serif !important;
     padding: 2rem 1rem;
 }
 
@@ -171,11 +171,11 @@ a:hover {
     align-items: flex-start;
     justify-content: center;
     gap: 16px;
-    font-family:'roboto' , Arial, Helvetica, sans-serif !important;
+    font-family: 'roboto', Arial, Helvetica, sans-serif !important;
 }
 
 .privacy-policy a {
-    font-family:'roboto' , Arial, Helvetica, sans-serif !important;
+    font-family: 'roboto', Arial, Helvetica, sans-serif !important;
 }
 
 .privacy-policy-body h1 {
@@ -215,9 +215,10 @@ a:hover {
 
 .mobile-row {
     width: 100%;
-    display: flex;
+    display: none;
     justify-content: space-between;
-    padding: 24px;
+    padding: 16px;
+    padding-bottom: 16px;
     align-items: center;
 }
 
@@ -242,6 +243,10 @@ a:hover {
     display: none;
 }
 
+.turn-overlay {
+    display: none;
+}
+
 @media (max-width: 1160px) {
     .help-bar {
         left: 0px;
@@ -250,52 +255,77 @@ a:hover {
     #info {
         display: flex;
     }
+
+    .mobile-row {
+        display: flex;
+    }
 }
 
 @media (max-width: 740px) {
     canvas {
         width: 100%;
     }
+
     .game-arrea {
         width: 100%;
     }
+
     .top-container {
         width: 100%;
     }
+
     footer {
         display: none;
     }
+
     .main-container {
         padding: 0;
     }
+
     .top-container h1 {
         font-size: 2rem;
         padding-top: 2rem;
     }
 
-    
+}
+
+@media (max-width: 600px) {
+    .turn-overlay {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
 }
 
 @media (max-height: 480px) {
     canvas {
         height: 100vh;
     }
+
     .game-arrea {
         height: 100vh;
     }
+
     .top-container {
         height: 100vh;
         margin-top: 0;
     }
+
     .main-container {
         padding: 0;
     }
+
     .top-container h1 {
         display: none;
     }
+
     .start-btn {
         margin-top: 1rem;
     }
-    
-}
 
+}
