@@ -209,7 +209,8 @@ a:hover {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    align-items: center;
+    align-items: flex-end;
+    flex-direction: column-reverse;
 }
 
 .mobile-row {
@@ -237,10 +238,17 @@ a:hover {
     rotate: 90deg;
 }
 
-@media (max-width: 1500px) {
+#info {
+    display: none;
+}
+
+@media (max-width: 1160px) {
     .help-bar {
-        display: none;
         left: 0px;
+    }
+
+    #info {
+        display: flex;
     }
 }
 

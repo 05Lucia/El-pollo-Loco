@@ -11,6 +11,7 @@ function InitiateGame() { // a onclick function.
     intLevel1();
     world = new World(canvas, new Keyboard());
     checkForGameEnd();
+    document.getElementById('help-bar').classList.add('d-none')
 }
 
 function checkForGameEnd() {
@@ -48,8 +49,19 @@ function fullscreen() {
     if (!document.fullscreenElement) {
         gameContainer.requestFullscreen(); 
         document.getElementById('info').classList.add('d-none');
+        document.getElementById('help-bar').classList.add('d-none')
     } else {
         document.exitFullscreen();
         document.getElementById('info').classList.remove('d-none');
+    }
+}
+
+function info() {
+    let info = document.getElementById('help-bar')
+    
+    if (!info.classList.contains('d-none')) {
+        info.classList.add('d-none')
+    } else {
+        info.classList.remove('d-none')
     }
 }
