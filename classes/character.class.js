@@ -167,6 +167,7 @@ class Character extends MovebaleObject {
         this.idleEnd();
         this.running_sound.pause();
         this.playAnimation(this.IMG_JUMPING); // Jumping Animation
+        this.jumpStart()
     }
 
     /**
