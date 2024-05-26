@@ -110,22 +110,37 @@ class Character extends MovebaleObject {
     animation = setInterval(() => {
         this.running_sound.pause();
         if (this.isDead()) {
-            this.world.gameOver=true;
-            this.playAnimation(this.IMG_DEAD);
-            
+            this.deadAnimation();
         } else if (this.isHurt()) {
-            this.idleEnd();
-            this.playAnimation(this.IMG_HURT);
+            this.hurtAnimation();
         } else if (this.isAboveGround()) {
-            this.idleEnd();
-            this.running_sound.pause();
-            this.playAnimation(this.IMG_JUMPING); // Jumping Animation
+            this.jumpAnimation();
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            this.idleEnd();
-            this.playAnimation(this.IMG_WALKING);//walking animation
-            this.running_sound.play();
+            this.runningAnimation()
         }
     }, 100)
+
+    deadAnimation() {
+        this.world.gameOver=true;
+        this.playAnimation(this.IMG_DEAD);
+    }
+
+    hurtAnimation() {
+        this.idleEnd();
+        this.playAnimation(this.IMG_HURT);
+    }
+
+    jumpAnimation() {
+        this.idleEnd();
+        this.running_sound.pause();
+        this.playAnimation(this.IMG_JUMPING); // Jumping Animation
+    }
+
+    runningAnimation() {
+        this.idleEnd();
+        this.playAnimation(this.IMG_WALKING);//walking animation
+        this.running_sound.play();
+    }
 
     enableMovment = setInterval(() => {
         this.enableWalking();

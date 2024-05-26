@@ -213,6 +213,10 @@ a:hover {
     flex-direction: column-reverse;
 }
 
+.top-row img {
+    cursor: pointer;
+}
+
 .mobile-row {
     width: 100%;
     display: none;
@@ -233,6 +237,7 @@ a:hover {
     border: solid 2px black;
     border-radius: 100%;
     background-color: #F8D995;
+    cursor: pointer;
 }
 
 .throw-btn {
