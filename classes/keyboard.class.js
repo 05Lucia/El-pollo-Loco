@@ -4,11 +4,17 @@ class Keyboard {
     SPACE = false;
     THROW = false;
 
+    /**
+   * Creates a new keyboard instance and sets up event listeners for key presses and touches.
+   */
     constructor() {
         this.buttonPressEvent();
         this.keyPressEvent();
     }
 
+    /**
+   * Attaches event listeners for touch start/end events on directional and action buttons.
+   */
     buttonPressEvent() {
         document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
             e.preventDefault();
@@ -51,6 +57,9 @@ class Keyboard {
         });
     }
 
+    /**
+   * Attaches event listeners for key down/up events on keyboard keys.
+   */
     keyPressEvent() {
         document.addEventListener('keydown', (event) => {
             if (event.code == "ArrowRight") {

@@ -1,10 +1,17 @@
 let canvas;
 let world;
-// let keyboard = new Keyboard();
 let gameEndInterval;
 let music = true;
 
-function InitiateGame() { // a onclick function.
+/**
+ * Starts the game when the button is clicked.
+ *
+ * - Hides the start screen.
+ * - Initializes a new World object.
+ * - Starts checking for game end condition.
+ * - Hides the help bar.
+ */
+function InitiateGame() { 
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     document.getElementById('start-screen').classList.add('d-none');
@@ -14,6 +21,14 @@ function InitiateGame() { // a onclick function.
     document.getElementById('help-bar').classList.add('d-none')
 }
 
+/**
+ * Starts an interval to check if the game has ended.
+ *
+ * - If the world's `gameEnde` property is true (game ended),
+ *   - shows the restart button.
+ *   - clears the game's background sound interval.
+ *   - pauses the game's background sound.
+ */
 function checkForGameEnd() {
     gameEndInterval = setInterval(() => {
         if (world.gameEnde === true) {
@@ -24,7 +39,16 @@ function checkForGameEnd() {
     }, 1000 / 60);
 }
 
-function reset() {
+/**
+ * Resets the game state when the button is clicked.
+ *
+ * - Clears references to world and level objects.
+ * - Hides the restart button.
+ * - Hides the canvas element.
+ * - Clears the game end check interval.
+ * - Shows the start screen.
+ */
+function reset() { 
     world = null;
     level1 = null;
     document.getElementById('restart').classList.add('d-none');
@@ -33,6 +57,12 @@ function reset() {
     document.getElementById('start-screen').classList.remove('d-none');
 }
 
+/**
+ * Toggles music on/off based on the current music state.
+ *
+ * - Updates the music button image based on the music state.
+ * - Sets the `music` variable (presumably controls music playback).
+ */
 function toggleMusic() {
     const musicBtn = document.getElementById('audio-btn');
     if (music) {
@@ -44,7 +74,15 @@ function toggleMusic() {
     }
 }
 
-function fullscreen() {
+/**
+ * Toggles fullscreen mode for the game container.
+ *
+ * - If not in fullscreen, requests fullscreen mode for the game container.
+ *   - Hides the info and help bar elements.
+ * - If already in fullscreen, exits fullscreen mode.
+ *   - Shows the info element.
+ */
+function fullscreen() {// a onclick function.
     const gameContainer = document.getElementById('game-arrea')
     if (!document.fullscreenElement) {
         gameContainer.requestFullscreen(); 
@@ -56,7 +94,10 @@ function fullscreen() {
     }
 }
 
-function info() {
+/**
+ * Toggles the visibility of the help bar.
+ */
+function info() {// a onclick function.
     let info = document.getElementById('help-bar')
     
     if (!info.classList.contains('d-none')) {

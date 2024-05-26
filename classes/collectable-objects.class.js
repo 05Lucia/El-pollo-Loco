@@ -4,6 +4,12 @@ class CollectableObjects extends MovebaleObject{
     width = 100;
     activ = true;
 
+    /**
+   * Creates a new collectable object instance.
+   * 
+   * @param {number} y - The initial y-coordinate of the object.
+   * @param {string} img - The path to the image for the object.
+   */
     constructor(y, img){
         super().loadeImage(img);
         this.y = y;

@@ -69,6 +69,9 @@ class Character extends MovebaleObject {
     running_sound = new Audio('./audio/running.mp3');
     jumping_sound = new Audio('./audio/jump.mp3')
 
+    /**
+   * Loads the default idle image for the character.
+   */
     constructor() {
         super().loadeImage('./img/2_character_pepe/1_idle/idle/I-1.png');
         this.loadeImages(this.IMG_WALKING);
@@ -82,16 +85,29 @@ class Character extends MovebaleObject {
         this.idleStart();
     }
 
+    /**
+   * Records the start time for the idle animation.
+   */
     idleStart() {
         this.startIdle = new Date().getTime();
     }
 
+    /**
+   * Calculates if the character has been idle for more than 3 seconds.
+   * True if the character has been idle for more than 3 seconds, false otherwise.
+   * @returns {boolean}  
+   */
     idleTime() {
         let idleTime = new Date().getTime() - this.startIdle;
         idleTime = idleTime / 1000;
-        return idleTime >= 3; 
+        return idleTime >= 3;
     }
 
+    /**
+   * Starts an interval that plays the long idle animation when certain conditions are met (not jumping, on ground, not moving).
+   * The interval ID for the long idle animation (private property)
+   * @type {number}
+   */
     idelAnimation = setInterval(() => {
         if (!(this.isAboveGround(130)) && this.idleTime() && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
             this.playAnimation(this.IMG_IDLE_LONG);
@@ -103,10 +119,18 @@ class Character extends MovebaleObject {
         }
     }, 500);
 
-    idleEnd(){ 
+    /**
+   * Resets the idle start time.
+   */
+    idleEnd() {
         this.startIdle = 0;
     }
 
+    /**
+   * Starts an interval that checks the character's state and plays the corresponding animation (dead, hurt, jumping, running, idle).
+   * The interval ID for the main animation loop (private property).
+   * @type {number} 
+   */
     animation = setInterval(() => {
         this.running_sound.pause();
         if (this.isDead()) {
@@ -120,28 +144,45 @@ class Character extends MovebaleObject {
         }
     }, 100)
 
+    /**
+   * Plays the death animation and sets the game to over state.
+   */
     deadAnimation() {
-        this.world.gameOver=true;
+        this.world.gameOver = true;
         this.playAnimation(this.IMG_DEAD);
     }
 
+    /**
+   * Plays the hurt animation and resets the idle timer.
+   */
     hurtAnimation() {
         this.idleEnd();
         this.playAnimation(this.IMG_HURT);
     }
 
+    /**
+   * Plays the jump animation and stops the running sound.
+   */
     jumpAnimation() {
         this.idleEnd();
         this.running_sound.pause();
         this.playAnimation(this.IMG_JUMPING); // Jumping Animation
     }
 
+    /**
+   * Plays the running animation and starts the running sound.
+   */
     runningAnimation() {
         this.idleEnd();
         this.playAnimation(this.IMG_WALKING);//walking animation
         this.running_sound.play();
     }
 
+    /**
+   * Starts an interval that handles character movement based on keyboard input and jumping.
+   * The interval ID for movement and jump handling (private property)
+   * @type {number} 
+   */
     enableMovment = setInterval(() => {
         this.enableWalking();
         if (this.world.keyboard.SPACE && !this.isAboveGround(130)) {
@@ -151,11 +192,17 @@ class Character extends MovebaleObject {
         }
     }, 1000 / 60);
 
+    /**
+   * Plays the jump sound effect with adjusted volume.
+   */
     jumpingSound() {
         this.jumping_sound.play();
         this.jumping_sound.volume = 0.3;
     }
 
+    /**
+   * Handles character movement to the left or right based on keyboard input and keeps the camera centered.
+   */
     enableWalking() {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.idleEnd();
@@ -170,8 +217,10 @@ class Character extends MovebaleObject {
         this.world.camera_x = -this.x + 90;
     }
 
+    /**
+   * Sets the character's vertical speed for jumping.
+   */
     jump() {
         this.speedY = 30;
     }
-
 }

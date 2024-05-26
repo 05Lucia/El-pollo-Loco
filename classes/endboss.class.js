@@ -32,6 +32,13 @@ class Endboss extends MovebaleObject {
     speed = 0.3;
     alerted = false;
 
+    /**
+   * Creates a new endboss enemy.
+   * - Loads the default walking animation image.
+   * - Sets the starting position on the x-axis.
+   * - Loads walking, dead, hurt, and alerted animation images.
+   * - Starts the movement and animation loops.
+   */
     constructor() {
         super().loadeImage('./img/4_enemie_boss_chicken/1_walk/G1.png');
         this.loadeImages(this.IMG_WALKING);
@@ -41,10 +48,22 @@ class Endboss extends MovebaleObject {
         this.x = 2400;
     }
 
+    /**
+   * Internal function that continuously moves the endboss to the left.
+   * - Moves the endboss leftward by its speed value.
+   */
     enableMovment = setInterval(() => {
         this.moveLeft();
     }, 1000 / 60);
 
+    /**
+   * Internal function that continuously plays the appropriate animation.
+   * - Checks if the endboss is dead, hurt, alerted, or in its normal walking state.
+   *   - Plays the dead animation, stops movement, and updates the last image if dead.
+   *   - Plays the hurt animation and a sound effect if hurt.
+   *   - Plays the alerted animation if alerted.
+   *   - Plays the walking animation otherwise.
+   */
     animate = setInterval(() => {
         if (this.isDead()) {
             this.playAnimation(this.IMG_DEAD);
@@ -58,10 +77,5 @@ class Endboss extends MovebaleObject {
         } else {
             this.playAnimation(this.IMG_WALKING);
         }
-    }, 200)
-
-    
-        
-
-
+    }, 200);
 }

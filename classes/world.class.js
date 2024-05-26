@@ -18,6 +18,12 @@ class World {
     endScreen = 0;
     gameEnde = false;
 
+    /**
+   * Creates a new World instance.
+   *
+   * @param {HTMLCanvasElement} canvas - The canvas element to use for rendering.
+   * @param {Keyboard} keyboard - The keyboard object for handling player input.
+   */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
         this.canvas = canvas;
@@ -27,11 +33,22 @@ class World {
         this.constantRepeat();
     }
 
+    /**
+   * Initializes references between the world and its components (character, collisions).
+   */
     setWorld() {
         this.character.world = this;
         this.collistions.world = this;
     }
 
+    /**
+   * Starts a repeating loop for core game logic updates.
+   *
+   * - Checks for collisions.
+   * - Throws salsa bottles based on player input and cooldowns.
+   * - Checks for game over condition.
+   * - Manages background music playback.
+   */
     constantRepeat() {
         this.keepChecking = setInterval(() => {
             this.collistions.checkCollisions();
@@ -41,6 +58,9 @@ class World {
         }, 1000 / 60);
     }
 
+    /**
+   * Plays or pauses the background music based on the global `music` variable.
+   */
     backgroundMusic() {
         if (music) {
             this.background_sound.volume = 0.07;
@@ -51,12 +71,26 @@ class World {
 
     }
 
+    /**
+   * Called when the game is won.
+   *
+   * - Plays the winning sound.
+   * - Creates a new end screen object.
+   * - Ends the game.
+   */
     won() {
         this.winning_sound.play();
         this.endScreen = new EndScreen('./img/9_intro_outro_screens/win/won_2.png')
         this.gameEnded();
     }
 
+    /**
+  * Called when the game is lost.
+  *
+  * - Plays the losing sound.
+  * - Creates a new end screen object.
+  * - Ends the game.
+  */
     lost() {
         if (this.gameOver === true) {
             this.losing_sound.play();
@@ -65,6 +99,12 @@ class World {
         }
     }
 
+    /**
+   * Stops the game loop and animations when the game ends.
+   * - Clears the `keepChecking` interval.
+   * - Cancels the `animationRequest` after a short delay (500ms).
+   * - Sets `gameEnde` to true to indicate game ended state.
+   */
     gameEnded() {
         clearInterval(this.keepChecking);
         setTimeout(() => {
@@ -73,6 +113,15 @@ class World {
         this.gameEnde = true;
     }
 
+    /**
+   * Throws a salsa bottle if certain conditions are met.
+   * - Checks for keyboard throw key press, sufficient salsa bottles, and a throw time brake.
+   * - Creates a new `ThrowableObject` instance and adds it to the world.
+   * - Decrements salsa bottle count and percentage.
+   * - Updates the status bar with the new salsa percentage.
+   * - Sets the last throw time for the throw brake.
+   * - Calls `character.idleEnd()` to handle character animation.
+   */
     throwObjects() {
         if (this.keyboard.THROW && this.collistions.salsaBottle != 0 && this.throwBrake()) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -85,11 +134,25 @@ class World {
         }
     }
 
+    /**
+   * Checks if enough time has passed since the last throw to allow another throw.
+   * - Calculates the time difference between the current time and the last throw time.
+   * - Returns true if at least 200 milliseconds have passed.
+   */
     throwBrake() {
-        let timePassed = new Date().getTime() - this.lastThrow; // Differenc in ms
+        let timePassed = new Date().getTime() - this.lastThrow;
         return timePassed >= 200;
     }
 
+    /**
+   * The main game loop function responsible for drawing and updating the game world.
+   * - Clears the canvas.
+   * - Applies camera translation.
+   * - Draws movable objects on screen.
+   * - Draws static objects on screen.
+   * - Cancels camera translation.
+   * - Calls `drawAnimation` to request another animation frame.
+   */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -99,6 +162,10 @@ class World {
         this.drawAnimation();
     }
 
+    /**
+   * Draws all movable objects currently within the viewport.
+   * - Calls `addObjectsToMap` for various object categories (background, clouds, etc.).
+   */
     movableObjectsOnScreen() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
@@ -109,6 +176,11 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
     }
 
+    /**
+   * Draws all static objects on screen.
+   * - Applies camera translation (negative) before drawing status bar and end screen.
+   * - Cancels camera translation afterwards.
+   */
     staticObjectsOnScreen() {
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.level.statusBar);
@@ -118,6 +190,10 @@ class World {
         this.ctx.translate(this.camera_x, 0);
     }
 
+    /**
+   * Requests an animation frame for the next draw cycle.
+   * - Schedules a callback function (`draw`) to be called by the browser for the next animation frame.
+   */
     drawAnimation() {
         let self = this;
         this.animationRequest = requestAnimationFrame(function () {// draw() wird immer wieder aufgerufen.
@@ -125,12 +201,24 @@ class World {
         });
     }
 
+    /**
+   * Helper function to add a collection of objects to the map (presumably for drawing).
+   * - Iterates over each object in the collection and calls `addToMap` on it.
+   */
     addObjectsToMap(ojects) {
         ojects.forEach(o => {
             this.addToMap(o);
         });
     }
 
+    /**
+   * Draws a single object on the game canvas.
+   * - Flips the object's image if the `otherDirection` flag is set.
+   * - Calls the object's `draw` method to render it on the canvas.
+   * - Flips the image back if previously flipped.
+   * 
+   @param {DrawableObject} mo - The moveble object to be drawn.
+   */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImg(mo);
@@ -141,6 +229,15 @@ class World {
         }
     }
 
+    /**
+   * Flips the object's image horizontally on the canvas by manipulating the context.
+   * - Saves the current canvas state.
+   * - Translates the context by the object's width.
+   * - Scales the context horizontally by -1 (mirroring).
+   * - Mirrors the object's x-coordinate for correct positioning.
+   * 
+   @param {DrawableObject} mo - The moveble object to be flipped.
+   */
     flipImg(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0); // object um seine eingene berite verscheiben (damit kein sprung enstehent)
@@ -148,6 +245,13 @@ class World {
         mo.x = mo.x * -1;// x kordiante spiegeln damit in die richtige richtung gelaufen wird.
     }
 
+    /**
+   * Resets the image flipping applied in `flipImg` and restores the original state.
+   * - Multiplies the object's x-coordinate by -1 to undo mirroring.
+   * - Restores the canvas context to its previous state before flipping.
+   * 
+   @param {DrawableObject} mo - The moveble object that was flipped.
+   */
     flipImgBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();// reset damit alles andere nicht spiegel verkehrt ist!! 
