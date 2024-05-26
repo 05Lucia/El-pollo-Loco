@@ -32,8 +32,8 @@
     <div class="main-container">
         <div class="top-container">
             <h1 translate="no">El Pollo Loco</h1>
-            <div class="game-arrea">
-                <div class="help-bar">
+            <div id="game-arrea" class="game-arrea">
+                <div id="help-bar" class="help-bar">
                     <h2 class="title">Tasten</h2>
                     <h3>Laufe Rechts</h3>
                     <h2>Rechts</h2>
@@ -46,9 +46,9 @@
                 </div>
                 <div class="overlay">
                     <div class="top-row">
-                        <img src="./img/icons/info.svg" alt="info">
+                        <img id="info" src="./img/icons/info.svg" alt="info">
                         <img id="audio-btn" src="./img/icons/music_note.svg" alt="music" onclick="toggleMusic()">
-                        <img src="./img/icons/fullscreen.svg" alt="fullscreen">
+                        <img src="./img/icons/fullscreen.svg" alt="fullscreen" onclick="fullscreen()">
                     </div>
                     <div class="mobile-row">
                         <div class="move">

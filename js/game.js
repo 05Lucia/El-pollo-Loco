@@ -42,3 +42,14 @@ function toggleMusic() {
         music = true;
     }
 }
+
+function fullscreen() {
+    const gameContainer = document.getElementById('game-arrea')
+    if (!document.fullscreenElement) {
+        gameContainer.requestFullscreen(); 
+        document.getElementById('info').classList.add('d-none');
+    } else {
+        document.exitFullscreen();
+        document.getElementById('info').classList.remove('d-none');
+    }
+}

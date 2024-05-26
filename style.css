@@ -237,6 +237,13 @@ a:hover {
     rotate: 90deg;
 }
 
+@media (max-width: 1500px) {
+    .help-bar {
+        display: none;
+        left: 0px;
+    }
+}
+
 @media (max-width: 740px) {
     canvas {
         width: 100%;
