@@ -175,7 +175,9 @@ class Character extends MovebaleObject {
     runningAnimation() {
         this.idleEnd();
         this.playAnimation(this.IMG_WALKING);//walking animation
-        this.running_sound.play();
+        if (music) {
+          this.running_sound.play();  
+        }
     }
 
     /**
@@ -196,7 +198,9 @@ class Character extends MovebaleObject {
    * Plays the jump sound effect with adjusted volume.
    */
     jumpingSound() {
-        this.jumping_sound.play();
+        if (music) {
+          this.jumping_sound.play();  
+        }
         this.jumping_sound.volume = 0.3;
     }
 

@@ -80,6 +80,8 @@ body {
 }
 
 .restart {
+    padding-top: 300px;
+    position: absolute;
     background-color: transparent;
     border: none;
     font-size: 2rem;

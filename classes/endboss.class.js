@@ -71,7 +71,9 @@ class Endboss extends MovebaleObject {
             this.loadeImage(this.IMG_DEAD[2])
         } else if (this.isHurt(this.speed)) {
             this.playAnimation(this.IMG_HURT);
-            this.chicken_sound.play();
+            if (this.world.music === true) {
+                enemy.chicken_sound.play();  
+              }
         } else if (this.alerted === true) {
             this.playAnimation(this.IMG_ALERTED);
         } else {

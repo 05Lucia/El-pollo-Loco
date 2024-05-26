@@ -47,7 +47,9 @@ class ThrowableObject extends MovebaleObject {
    */
     throw() {
         this.applyGravity(370);
-        this.throwing_sound.play();
+        if (music) {
+           this.throwing_sound.play(); 
+        }
     }
 
     /**
@@ -86,7 +88,9 @@ class ThrowableObject extends MovebaleObject {
    */
     salsaHit() {
         this.splashing_sound.volume = 0.5;
-        this.splashing_sound.play();
+        if (music === true) {
+           this.splashing_sound.play(); 
+        }
         this.activ = false;
         this.x += 0;
         clearInterval(this.animateTrow);

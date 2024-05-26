@@ -35,9 +35,11 @@ class Collisions {
         this.world.level.enemies
             .filter((enemy) => enemy instanceof Chicken || enemy instanceof SmallChicken)
             .forEach((enemy) => {
-                if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround(130)) {
+                if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround(130) && this.world.character.speedY != 0) {
                     enemy.lifePoints = 0;
-                    enemy.chicken_sound.play();
+                    if (this.world.music === true) {
+                        enemy.chicken_sound.play();  
+                      }
                 } else if (this.world.character.isColliding(enemy) && !(enemy.isDead()) && this.wasHurt(this.world.character)) {
                     this.characterHurting();
                 } else if (this.world.character.isDead()) {
@@ -175,7 +177,10 @@ class Collisions {
             .forEach((enemy) => {
             if (bottle.isColliding(enemy) && this.wasHurt(enemy) && bottle.activ === true) {
                 enemy.lifePoints = 0;
-                enemy.chicken_sound.play();
+                if (this.world.music === true) {
+                  enemy.chicken_sound.play();  
+                }
+                
                 bottle.salsaHit();
                 setTimeout(() => {
                     clearInterval(bottle.spalsh);
