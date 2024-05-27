@@ -254,7 +254,7 @@ a:hover {
     display: none;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1370px) {
     .help-bar {
         left: 0px;
     }
