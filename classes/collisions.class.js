@@ -35,7 +35,7 @@ class Collisions {
         this.world.level.enemies
             .filter((enemy) => enemy instanceof Chicken || enemy instanceof SmallChicken)
             .forEach((enemy) => {
-                if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround(130) && this.world.character.speedY < 0) {
+                if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround(130) && this.world.character.speedY < -3) {
                     enemy.lifePoints = 0;
                     if (this.world.music === true) {
                         enemy.chicken_sound.play();  

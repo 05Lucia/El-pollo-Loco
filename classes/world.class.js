@@ -79,7 +79,9 @@ class World {
    * - Ends the game.
    */
     won() {
-        this.winning_sound.play();
+        if (music) {
+            this.winning_sound.play();
+        }
         this.endScreen = new EndScreen('./img/9_intro_outro_screens/win/won_2.png')
         this.gameEnded();
     }
@@ -93,7 +95,9 @@ class World {
   */
     lost() {
         if (this.gameOver === true) {
-            this.losing_sound.play();
+            if (music) {
+                this.losing_sound.play();
+            }
             this.endScreen = new EndScreen('./img/9_intro_outro_screens/game_over/game over.png')
             this.gameEnded();
         }
