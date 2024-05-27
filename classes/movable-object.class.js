@@ -59,9 +59,9 @@ class MovebaleObject extends DrawableObject {
     const moRight = mo.x + mo.width; // Right edge of the other object (mo)
     const moBottom = mo.y + mo.height; // Bottom edge of the other object
   
-    return myRight >= mo.x && // Right edge of this object (minus offset) past left edge of mo
+    return myRight >= mo.x && // Right edge of this object past left edge of mo
            this.x + this.offsetX <= moRight &&  // Left edge of this object before right edge of mo
-           myTop <= moBottom &&   // Top edge of this object (with offset) before bottom edge of mo
+           myTop <= moBottom &&   // Top edge of this object before bottom edge of mo
            this.y + this.height >= mo.y; // Bottom edge of this object past top edge of mo
   }
 
