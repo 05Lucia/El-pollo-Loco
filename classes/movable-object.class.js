@@ -7,6 +7,8 @@ class MovebaleObject extends DrawableObject {
     lastHit = 1;
     chicken_sound = new Audio('./audio/chicken.mp3')
     dead = false;
+    offsetY = 0;
+    offsetX = 70;
 
     /**
    * Applies gravity to the object, simulating falling motion.
@@ -51,12 +53,17 @@ class MovebaleObject extends DrawableObject {
    @param {MovebaleObject} mo - The other movable object to check for collision with.
    @returns {boolean} - True if there's a collision, false otherwise.
    */
-    isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x + mo.width &&
-            this.y < mo.y + mo.height;
-    }
+   isColliding(mo) {
+    const myRight = this.x + this.width - this.offsetX; // Right edge of this object minus offset
+    const myTop = this.y - this.offsetY; // Top edge of this object with offset
+    const moRight = mo.x + mo.width; // Right edge of the other object (mo)
+    const moBottom = mo.y + mo.height; // Bottom edge of the other object
+  
+    return myRight >= mo.x && // Right edge of this object (minus offset) past left edge of mo
+           this.x + this.offsetX <= moRight &&  // Left edge of this object before right edge of mo
+           myTop <= moBottom &&   // Top edge of this object (with offset) before bottom edge of mo
+           this.y + this.height >= mo.y; // Bottom edge of this object past top edge of mo
+  }
 
     /**
    * Handles the object being hit by something (dealing damage).
@@ -135,6 +142,6 @@ class MovebaleObject extends DrawableObject {
    */
     isClose(mo) {
         let distance = mo.x - (this.x + this.width)
-        return distance < 290;
+        return distance < 150;
     }
 }

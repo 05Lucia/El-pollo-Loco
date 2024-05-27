@@ -37,7 +37,7 @@ class Collisions {
             .forEach((enemy) => {
                 if (this.world.character.isColliding(enemy) && this.world.character.isAboveGround(130) && this.world.character.speedY < -3) {
                     enemy.lifePoints = 0;
-                    if (this.world.music === true) {
+                    if (music) {
                         enemy.chicken_sound.play();  
                       }
                 } else if (this.world.character.isColliding(enemy) && !(enemy.isDead()) && this.wasHurt(this.world.character)) {
