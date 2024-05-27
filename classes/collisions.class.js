@@ -3,6 +3,7 @@ class Collisions {
     coins = 0;
     salsaPrecent = 0;
     salsaBottle = 0;
+    lastAlert = 1;
 
     /**
    * Checks for collisions between all relevant game objects in the world.
@@ -194,8 +195,20 @@ class Collisions {
    */
     closnesToBoss() {
         const endBoss = this.world.level.enemies[this.world.level.enemies.length - 1];
-        if (this.world.character.isClose(endBoss)) {
+        if (this.world.character.isClose(endBoss) && this.wasLastAlert()) {
             endBoss.alerted = true;
+            endBoss.speed = 0;
+            this.lastAlert = new Date().getTime();
+            setTimeout(() => {
+                endBoss.alerted = false;
+                endBoss.speed = 0.6;
+            }, 1000)
         }
+    }
+
+    wasLastAlert() {
+        let timePassed = new Date().getTime() - this.lastAlert; // Differenc in ms
+        timePassed = timePassed / 1000;
+        return timePassed >= 4;
     }
 }

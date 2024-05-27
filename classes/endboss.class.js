@@ -79,5 +79,5 @@ class Endboss extends MovebaleObject {
         } else {
             this.playAnimation(this.IMG_WALKING);
         }
-    }, 200);
+    }, 100);
 }
